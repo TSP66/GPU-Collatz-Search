@@ -6,7 +6,7 @@
 typedef unsigned long long int val;
 
 const int maxLength = 10;
-const int lengthNum = 5;
+const int lengthNum = 19;
 const val maxNum = pow(10,lengthNum);//pow(10,19);
 
 //Max possible number = 10^(19,000) or ~2^(63,000)
@@ -40,7 +40,6 @@ class bigNumber{
     void subtraction(val * Data, unsigned long value){ //Not for negative numbers
 
         bool notFinished = true;
-        int pos = 0;
         long append_value = value;
 
         if(allbutone(Data)){
@@ -53,7 +52,7 @@ class bigNumber{
         }
         else{
             if(Data[0] >= value){
-                Data[0] = Data[0] - value;
+                Data[0] = Data[0]-value;
             }
             else{
                 bool notbroken = true;
@@ -69,6 +68,7 @@ class bigNumber{
                         notbroken = false;
                         break;
                     }
+                    pos++;
 
                 }
             }
@@ -92,9 +92,9 @@ class bigNumber{
         std::copy(std::begin(data), std::end(data), std::begin(copy));
 
         while(!allbutone(copy)){
+            for(int i = maxLength-1; i >= 0; i--) copy[i] = copy[i] % value;
             subtraction(copy,value);
-            //display_number();
-            
+            //display_number(copy);
         }
 
         return(copy[0]%value);
@@ -116,6 +116,31 @@ class bigNumber{
                 for(digits = 0; num > 0; digits++) num = num/10;
                 for(int z = 0; z < lengthNum - digits; z++) zeros = zeros + "0";
                 std::cout << zeros;
+                std::cout << data[i];
+
+            }
+        }
+        std::cout << "\n";
+
+    }
+    void display_number(val * Data){
+        bool startedDisplaying = false;
+        std::cout << "\n";
+        for(int i = maxLength-1; i >= 0; i--){
+            if(!startedDisplaying){
+                if(Data[i] != 0){
+                    startedDisplaying = true;
+                    std::cout << Data[i];
+                }
+            }
+            else{
+                val num = Data[i];
+                std::string zeros = "";
+                int digits;
+                for(digits = 0; num > 0; digits++) num = num/10;
+                for(int z = 0; z < lengthNum - digits; z++) zeros = zeros + "0";
+                std::cout << zeros;
+                std::cout << Data[i];
 
             }
         }
@@ -127,11 +152,11 @@ class bigNumber{
 
 int main() {
     bigNumber num;
+    num.data[2] = 3006;
     num.data[1] = 6;
-    num.display_number();
-    std::cout << num.data[maxLength-1];
-    num.addition(603);
+    num.addition(604);
     //num.modulus(6);
-    std::cout << num.modulus(101);
+    num.display_number();
+    std::cout << num.modulus(5);
     return 0;
 }
