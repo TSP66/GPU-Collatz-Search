@@ -5,7 +5,7 @@
 
 typedef unsigned long long int val;
 
-const int maxLength = 10;
+const int maxLength = 10100;
 const int lengthNum = 18; //val can hold up to 19 digit numbers, but if it is set to 18, 
 //it means it can be used for calcuations that briefly require more digits such as 3n+1
 const val maxNum = pow(10,lengthNum);//pow(10,18);
@@ -59,10 +59,10 @@ class bigNumber{
     }
 
     void divideTwo(void){
-        if(odd()) throw "An odd number was passed";
+        if(odd() == 1) throw "An odd number was passed";
         for(int i = 0; i < maxLength-1; i++){
             if(data[i] % 2 == 0){
-                data[i] == (val) data[i]/2;
+                data[i] = (val) data[i]/2;
             }
             else{
                 data[i] = (val) (data[i]-1)/2;
@@ -95,6 +95,15 @@ class bigNumber{
         std::cout << "\n";
 
     }
+
+    bool equal_to_one(void){
+        if(data[0] == 1){
+            for(int i = maxLength-1; i > 0; i--) if(data[i] != 0) return 0;
+            return 1;
+        }
+        return 0;
+    }
+
     void display_number(val * Data){
         bool startedDisplaying = false;
         std::cout << "\n";
@@ -122,13 +131,42 @@ class bigNumber{
 
 };
 
-int main() {
+class search{
+
+    public:
+
+    bigNumber start;
     bigNumber num;
-    num.data[7] = 3005436;
-    num.data[1] = 16;
-    num.addition(604);
+
+    search(bigNumber start_point){
+        num = start_point;
+        start = start_point;
+    }
+
+    long startToOne(void){
+        long steps = 0;
+        while(!num.equal_to_one()){
+            steps++;
+            if(num.odd()){
+                num.three_nPlusOne();
+            }
+            else{
+                num.divideTwo();
+            }
+        //num.display_number();
+        }
+        return steps;
+    }
+};
+
+int main() {
+    bigNumber number;
+    number.addition(603);
+    number.data[9999] = 3005436;
+    //num.data[1] = 16;
+    search num(number);
+    num.num.display_number();
     //num.modulus(6);
-    num.display_number();
-    std::cout << num.modulus(101);
+    std::cout << num.startToOne();
     return 0;
 }
