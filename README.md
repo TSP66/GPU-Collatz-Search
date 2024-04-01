@@ -1,2 +1,2 @@
-# Great Perfect Number Search
+# Great Collatz Search
  
