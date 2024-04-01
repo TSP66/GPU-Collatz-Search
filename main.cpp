@@ -1,11 +1,13 @@
 #include <iostream>
 #include <cmath>
 #include <climits>
+#include <string>
 
 typedef unsigned long long int val;
 
 const int maxLength = 10;
-const val maxNum = pow(10,3);//pow(10,19);
+const int lengthNum = 5;
+const val maxNum = pow(10,lengthNum);//pow(10,19);
 
 //Max possible number = 10^(19,000) or ~2^(63,000)
 
@@ -108,9 +110,13 @@ class bigNumber{
                 }
             }
             else{
-                if(data[i] > 100) std::cout << data[i];
-                else if(data[i] > 10) std::cout << "0" << data[i];
-                else std::cout << "00" << data[i];
+                val num = data[i];
+                std::string zeros = "";
+                int digits;
+                for(digits = 0; num > 0; digits++) num = num/10;
+                for(int z = 0; z < lengthNum - digits; z++) zeros = zeros + "0";
+                std::cout << zeros;
+
             }
         }
         std::cout << "\n";
@@ -122,9 +128,10 @@ class bigNumber{
 int main() {
     bigNumber num;
     num.data[1] = 6;
+    num.display_number();
     std::cout << num.data[maxLength-1];
     num.addition(603);
     //num.modulus(6);
-    std::cout << num.modulus(6);
+    std::cout << num.modulus(101);
     return 0;
 }
