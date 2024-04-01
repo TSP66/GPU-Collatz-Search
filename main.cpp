@@ -4,8 +4,8 @@
 
 typedef unsigned long long int val;
 
-const int maxLength = 1000;
-const val maxNum = pow(10,19);
+const int maxLength = 10;
+const val maxNum = pow(10,3);//pow(10,19);
 
 //Max possible number = 10^(19,000) or ~2^(63,000)
 
@@ -13,7 +13,7 @@ class bigNumber{
 
     public:
 
-    val data[maxLength];
+    val data[maxLength] = { };
     
     void addition(unsigned long value){ //Not for negative numbers
 
@@ -75,28 +75,32 @@ class bigNumber{
     }
 
     bool allbutone(val * Data){
-        for(int i = maxLength; i > 0; i--){
-            if(Data[i] != 0) return 0;
+        for(int i = maxLength-1; i > 0; i--){
+            if(Data[i] != 0){ 
+                return(0);
+            };
         }
         return(1);
     }
 
     int modulus(long value){
 
-        val copy[maxLength];
+        val copy[maxLength] = {};
 
         std::copy(std::begin(data), std::end(data), std::begin(copy));
 
-        bool notFinished = true;
-        int pos = 0;
-
-        while(!allbutone(copy)) subtraction(copy,value);
+        while(!allbutone(copy)){
+            subtraction(copy,value);
+            //display_number();
+            
+        }
 
         return(copy[0]%value);
     }
     void display_number(void){
         bool startedDisplaying = false;
-        for(int i = maxLength; i >= 0; i--){
+        std::cout << "\n";
+        for(int i = maxLength-1; i >= 0; i--){
             if(!startedDisplaying){
                 if(data[i] != 0){
                     startedDisplaying = true;
@@ -104,9 +108,12 @@ class bigNumber{
                 }
             }
             else{
-                std::cout << data[i];
+                if(data[i] > 100) std::cout << data[i];
+                else if(data[i] > 10) std::cout << "0" << data[i];
+                else std::cout << "00" << data[i];
             }
         }
+        std::cout << "\n";
 
     }
 
@@ -114,7 +121,10 @@ class bigNumber{
 
 int main() {
     bigNumber num;
-    num.addition(5000);
-    std::cout << maxNum;
+    num.data[1] = 6;
+    std::cout << num.data[maxLength-1];
+    num.addition(603);
+    //num.modulus(6);
+    std::cout << num.modulus(6);
     return 0;
 }
