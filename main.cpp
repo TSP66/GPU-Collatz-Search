@@ -152,11 +152,11 @@ class bigNumber{
 
 int main() {
     bigNumber num;
-    num.data[2] = 3006;
-    num.data[1] = 6;
+    num.data[7] = 3005436;
+    num.data[1] = 16;
     num.addition(604);
     //num.modulus(6);
     num.display_number();
-    std::cout << num.modulus(5);
+    std::cout << num.modulus(101);
     return 0;
 }
