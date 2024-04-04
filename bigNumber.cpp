@@ -59,19 +59,19 @@ void bigNumber::display_number(void){
     std::cout << "\n";
     for(int i = maxLength-1; i >= 0; i--){
         if(!startedDisplaying){
-            if(data[i] != 0){
+            if(bigNumber::data[i] != 0){
                 startedDisplaying = true;
-                std::cout << data[i];
+                std::cout << bigNumber::data[i];
             }
         }
         else{
-            val num = data[i];
+            val num = bigNumber::data[i];
             std::string zeros = "";
             int digits;
             for(digits = 0; num > 0; digits++) num = num/10;
             for(int z = 0; z < lengthNum - digits; z++) zeros = zeros + "0";
             std::cout << zeros;
-            std::cout << data[i];
+            std::cout << bigNumber::data[i];
         }
     }
     std::cout << "\n";
@@ -106,4 +106,47 @@ void bigNumber::display_number(val * Data){
         }
     }
     std::cout << "\n";
+}
+
+std::string number_to_string(void){
+    std:string String("");
+    bool startedDisplaying = false;
+    for(int i = maxLength-1; i >= 0; i--){
+        if(!startedDisplaying){
+            if(bigNumber::data[i] != 0){
+                startedDisplaying = true;
+                String.append(std::to_string(bigNumber::data[i]));
+            }
+        }
+        else{
+            val num = bigNumber::data[i];
+            std::string zeros = "";
+            int digits;
+            for(digits = 0; num > 0; digits++) num = num/10;
+            for(int z = 0; z < lengthNum - digits; z++) zeros = zeros + "0";
+            String.append(std::to_string(zeros));
+            String.append(std::to_string(bigNumber::data[i]));
+        }
+    }
+}
+std::string number_to_string(val * Data){
+    std:string String("");
+    bool startedDisplaying = false;
+    for(int i = maxLength-1; i >= 0; i--){
+        if(!startedDisplaying){
+            if(Data[i] != 0){
+                startedDisplaying = true;
+                String.append(std::to_string(Data[i]));
+            }
+        }
+        else{
+            val num = Data[i];
+            std::string zeros = "";
+            int digits;
+            for(digits = 0; num > 0; digits++) num = num/10;
+            for(int z = 0; z < lengthNum - digits; z++) zeros = zeros + "0";
+            String.append(std::to_string(zeros));
+            String.append(std::to_string(Data[i]));
+        }
+    }
 }

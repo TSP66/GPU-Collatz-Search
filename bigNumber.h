@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <string>
 
 typedef unsigned long long int val;
 
@@ -26,6 +27,9 @@ class bigNumber{
     void display_number(void);
     bool equal_to_one(void);
     void display_number(val * Data);
+
+    std::string number_to_string(void);
+    std::string number_to_string(val * Data);
 
 };
 
