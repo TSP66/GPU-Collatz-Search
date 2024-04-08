@@ -1,3 +1,6 @@
+#ifndef server_h
+#define server_h
+
 #include <iostream>
 #include <cstring>
 #include <unistd.h>
@@ -17,3 +20,5 @@ class server{
 
     std::string distributeAndRecieveWork(val * startnumber, val * endnumber);
 };
+
+#endif
